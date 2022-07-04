@@ -70,6 +70,10 @@ article img{
 
 .article{
     padding: 1rem;
+    border: 1px solid black;
+    background-color: white;
+    margin: 1rem;
+    padding: 0.5rem;
 }
 .article img{
     height: 500px;
@@ -87,4 +91,45 @@ footer{
 
 footer p{
     color: white;
+}
+
+@media screen and (max-width: 768px) {
+
+    article{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    article img{
+        padding-right: 0;
+    }
+
+
+    .article img{
+        height: 300px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        translate: 5%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    article{
+        display: flex;
+    }
+
+    article img{
+        padding-right: 0.5rem;
+    }
+
+
+    .article img{
+        height: 300px;
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        translate: 25%;
+    }
 }
