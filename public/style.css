@@ -37,6 +37,7 @@ header ul li{
 header ul li a{
     text-transform: uppercase;
     border: 1px solid black;
+    border-radius: 5px;
     background-color: grey;
     color: white;
     padding: 0.5rem;
@@ -47,17 +48,25 @@ header ul li a:hover{
     color: white;
 }
 
+a article:hover{
+    background-color: black;
+    color: white;
+}
 
 article{
     border: 1px solid black;
     background-color: white;
     margin: 1rem;
     padding: 0.5rem;
+
+    display: flex;
 }
 
 
 article img{
     height: 200px;
+    width: 300px;
+    padding-right: 1rem;
 }
 
 footer{
