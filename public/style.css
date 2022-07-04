@@ -1,3 +1,65 @@
-body {
-    
+@font-face {
+    font-family: "Lato Regular";
+    src: url("/fonts/Lato/Lato-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Lato Bold";
+    src: url("/fonts/Lato/Lato-Bold.ttf");
+}
+
+body{
+    background-color: grey;
+}
+
+a{
+    text-decoration: none;
+}
+
+header{
+    border: 1px solid black;
+    background-color: black;
+    font-family: "Lato Bold",Arial;
+}
+
+header ul{
+    display: flex;
+    list-style: none;
+}
+
+header ul li{
+    padding: 1rem;
+}
+
+header ul li a{
+    text-transform: uppercase;
+    border: 1px solid black;
+    background-color: grey;
+    color: white;
+    padding: 0.5rem;
+}
+
+header ul li a:hover{
+    background-color: darkgray;
+    color: white;
+}
+
+article{
+    border: 1px solid black;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+article img{
+    height: 200px;
+}
+
+footer{
+    border: 1px solid black;
+    background-color: black;
+    padding: 1rem;
+}
+
+footer p{
+    color: white;
 }

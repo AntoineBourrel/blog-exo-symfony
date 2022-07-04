@@ -56,7 +56,7 @@ class ListController extends AbstractController
         ];
 
         return $this->render('list.html.twig', [
-            'articles' => $articles
+            'articles' => array_reverse($articles)
         ]);
     }
 
