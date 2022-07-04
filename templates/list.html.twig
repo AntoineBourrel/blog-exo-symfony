@@ -1,7 +1,13 @@
 {% include '_header.html.twig' %}
 
 <main>
-    <p>test liste</p>
+    {% for article in articles %}
+        {% if article.isPublished %}
+            <a href="{{ path('article', {'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
+        {% else %}
+            <p>Cette article n'est pas encore publiée</p>
+        {% endif %}
+    {% endfor %}
 </main>
 
 {% include '_footer.html.twig' %}
