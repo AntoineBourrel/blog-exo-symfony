@@ -53,8 +53,13 @@ main a:hover{
 
 article{
     border: 1px solid black;
+    background-color: white;
     margin: 1rem;
     padding: 0.5rem;
+}
+
+article:hover{
+    background-color: black;
 }
 
 article img{
