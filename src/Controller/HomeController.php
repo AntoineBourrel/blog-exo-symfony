@@ -54,12 +54,10 @@ class HomeController extends AbstractController
         ];
 
         $articlesCount = count($articles);
-        $lastArticle = $articlesCount - 1;
-
-
+        $lastArticles = array_reverse(array_slice($articles, ($articlesCount - 3)));
 
         return $this->render('home.html.twig', [
-            'lastArticle' => $lastArticle
+            'lastArticles' => $lastArticles
         ]);
     }
 }

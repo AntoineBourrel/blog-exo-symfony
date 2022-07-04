@@ -1,7 +1,9 @@
 {% include '_header.html.twig' %}
 
 <main>
-    <p>test</p>
+    {% for article in lastArticles %}
+        <a href="{{ path('article', { 'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
+    {% endfor %}
 </main>
 
 {% include '_footer.html.twig' %}
