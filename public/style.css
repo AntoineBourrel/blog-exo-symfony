@@ -10,10 +10,13 @@
 
 body{
     background-color: grey;
+    margin: 0;
+    padding: 0;
 }
 
 a{
     text-decoration: none;
+    color: black;
 }
 
 header{
@@ -41,6 +44,10 @@ header ul li a{
 
 header ul li a:hover{
     background-color: darkgray;
+    color: white;
+}
+
+main a:hover{
     color: white;
 }
 
