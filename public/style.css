@@ -62,12 +62,22 @@ article{
     display: flex;
 }
 
-
 article img{
     height: 200px;
     width: 300px;
     padding-right: 1rem;
 }
+
+.article{
+    padding: 1rem;
+}
+.article img{
+    height: 500px;
+    width: 1000px;
+    translate: 10% 0;
+    padding: 1rem;
+}
+
 
 footer{
     border: 1px solid black;
