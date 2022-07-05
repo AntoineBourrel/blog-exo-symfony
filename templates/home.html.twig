@@ -10,7 +10,9 @@
     </form>
     <br>
     {% for article in lastArticles %}
-        <a href="{{ path('article', { 'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
+        {% if article.isPublished %}
+            <a href="{{ path('article', { 'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
+        {% endif %}
     {% endfor %}
 </main>
 
