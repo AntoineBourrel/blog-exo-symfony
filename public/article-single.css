@@ -1,0 +1,13 @@
+.article{
+    padding: 1rem;
+    border: 1px solid black;
+    background-color: white;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+.article img{
+    height: 500px;
+    width: 1000px;
+    translate: 9% 0;
+    padding: 1rem;
+}

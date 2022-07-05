@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    <title>{{ article.title }}</title>
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('article-single.css') }}">
+{% endblock %}
+
 {% block main %}
     <div class="article">
         <img src="{{ article.image }}" alt="image">
