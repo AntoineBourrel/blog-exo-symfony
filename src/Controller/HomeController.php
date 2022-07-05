@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -13,7 +14,7 @@ class HomeController extends AbstractController
      * @Route ("/", name="home")
      */
 
-    public function home(){
+    public function home(Request $request){
         $articles = [
             1 => [
                 'title' => 'Non, là c\'est sale',
@@ -56,8 +57,14 @@ class HomeController extends AbstractController
         $articlesCount = count($articles);
         $lastArticles = array_reverse(array_slice($articles, ($articlesCount - 3)));
 
-        return $this->render('home.html.twig', [
-            'lastArticles' => $lastArticles
-        ]);
+
+        if (($request->query->has('age')) && ($request->query->get('age') < 18)) {
+            return $this->render('error.html.twig');
+        } else {
+            return $this->render('home.html.twig', [
+                'lastArticles' => $lastArticles
+            ]);
+        }
+
     }
 }
