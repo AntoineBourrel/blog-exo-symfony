@@ -1,6 +1,6 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig' %}
 
-<main>
+{% block main %}
     <div class="article">
         <img src="{{ article.image }}" alt="image">
         <h2>{{ article.title }}</h2>
@@ -9,6 +9,4 @@
         <p>auteur : {{ article.author }}</p>
     </div>
 
-</main>
-
-{% include '_footer.html.twig' %}
+{% endblock %}

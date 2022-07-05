@@ -1,19 +1,23 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig' %}
 
-<main>
-    <form action="{{ path('home') }}">
-        <label for="age">Quel est votre âge ?</label>
+{% block main %}
+    <section id="formulaire">
+        <form action="{{ path('home') }}">
+            <label for="age">Quel est votre âge ?</label>
+            <br>
+            <input type="number" id="age" name="age">
+            <br>
+            <input type="submit" value="submit">
+        </form>
         <br>
-        <input type="number" id="age" name="age">
-        <br>
-        <input type="submit" value="submit">
-    </form>
-    <br>
-    {% for article in lastArticles %}
-        {% if article.isPublished %}
-            <a href="{{ path('article', { 'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
-        {% endif %}
-    {% endfor %}
-</main>
+    </section>
 
-{% include '_footer.html.twig' %}
+    <section id="article">
+        {% for article in lastArticles %}
+            {% if article.isPublished %}
+                <a href="{{ path('article', { 'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
+            {% endif %}
+        {% endfor %}
+    </section>
+
+{% endblock %}

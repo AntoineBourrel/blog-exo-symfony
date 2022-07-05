@@ -1,6 +1,6 @@
-{% include '_header.html.twig' %}
+{% extends 'base.html.twig' %}
 
-<main>
+{% block main %}
     {% for article in articles %}
         {% if article.isPublished %}
             <a href="{{ path('article', {'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
@@ -8,6 +8,6 @@
             <p>Cette article n'est pas encore publiée</p>
         {% endif %}
     {% endfor %}
-</main>
+{% endblock %}
 
-{% include '_footer.html.twig' %}
+
