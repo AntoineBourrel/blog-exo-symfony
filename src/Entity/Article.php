@@ -2,77 +2,122 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 // Déclaration de création d'une class qui sera une entité via ORM
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass=ArticleRepository::class)
  */
 class Article
 {
     // Paramètre de la colonne Id de la table Article, Type integer et auto-incrément
     /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
      */
     // déclaration de la colonne Id
-    public $id;
+    private $id;
 
-    // Paramètre de la colonne Title de la table Article, Type string qui devient Varchar 255
+    // Paramètre de la colonne title de la table Article, Type string qui devient Varchar 255
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
-    // déclaration de la colonne Title
-    public $title;
+    // déclaration de la colonne title
+    private $title;
 
-    // Paramètre de la colonne Image de la table Article, Type string qui devient Varchar 255
+    // Paramètre de la colonne image de la table Article, Type string qui devient Varchar 255
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
     // déclaration de la colonne image
-    public $image;
+    private $image;
 
     // Paramètre de la colonne IsPublished de la table Article, Type booléen
     /**
      * @ORM\Column(type="boolean")
      */
     // déclaration de la colonne isPublished
-    public $isPublished;
+    private $isPublished;
 
-    // Paramètre de la colonne author de la table Article, Type string qui devient Varchar 255
+    // Paramètre de la colonne image de la table Article, Type string qui devient Varchar 255
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=255)
      */
-    // déclaration de la colonne isPublished
-    public $author;
+    // déclaration de la colonne author
+    private $author;
 
+    // Paramètre de la colonne IsPublished de la table Article, Type text
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="text")
      */
-    private $publishedAt;
+    // déclaration de la colonne content
+    private $content;
 
-    public function getPublishedAt(): ?\DateTimeInterface
+    // GETTER et SETTER des attributs de la class Article
+    public function getId(): ?int
     {
-        return $this->publishedAt;
+        return $this->id;
     }
 
-    public function setPublishedAt(\DateTimeInterface $publishedAt): self
+    public function getTitle(): ?string
     {
-        $this->publishedAt = $publishedAt;
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }
 
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function isIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 }
-
-//créer la base de donnée
-// php bin/console doctrine:database:create
-
-//update de la table
-// php bin/console make:migration
-// si sucess
-//php bin/console doctrine:migration:migrate
-
-//Sinon par la console de commande
-// php bin/console make:entity
