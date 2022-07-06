@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+// Déclaration de création d'entité dans la table via class
 /**
  * @ORM\Entity()
  */
@@ -15,14 +16,22 @@ class Article
      * @ORM\Id()
      * @ORM\GeneratedValue()
      */
-    // Création de la colonne Id
+    // déclaration de la colonne Id
     public $id;
 
     // Paramètre de la colonne Title de la table Article, Type string qui devient Varchar 255
     /**
      * @ORM\Column(type="string")
      */
-    // Création de la colonne Title
+    // déclaration de la colonne Title
     public $title;
 
 }
+
+//créer la table
+// php bin/console doctrine:database:create
+
+//update de la table
+// php bin/console make:migration
+// si sucess
+//php bin/console doctrine:migration:migrate
