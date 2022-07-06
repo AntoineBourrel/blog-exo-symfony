@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class ListController extends AbstractController
 {
@@ -108,5 +111,29 @@ class ListController extends AbstractController
         return $this->render('show_article.html.twig', [
             'article' => $articles[$id]
         ]);
+    }
+
+    // Création de la route insert-article
+    /**
+     * @Route ("/insert-article", name="insert_article")
+     */
+    // Méthode pour insérer un article dans la base de donnée
+    // avec appel d'une instance de l'objet EntityMangerInterface
+    public function insertArticle(EntityManagerInterface $entityManager){
+
+        // Appel d'une instance de l'objet Article et déclaration des paramètres de cette instance
+        $article = new Article();
+        $article->setTitle("Chat Mignon");
+        $article->setContent("ouuuuh qu'il est ce petit chat ? Que je je lui roule dessus");
+        $article->setIsPublished(true);
+        $article->setImage('https://static.wamiz.com/images/upload/15876197_1368431473208290_144086124032163840_n(1).jpg');
+        $article->setAuthor('Maurice');
+
+        //Envoie vers la base de données avec persist qui finis avec son flush
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        dd($article);
+
     }
 }
