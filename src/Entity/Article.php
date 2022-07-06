@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article
 {
-    // Paramètre de la colonne Id de la table Article
+    // Paramètre de la colonne Id de la table Article, Type integer et auto-incrément
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id()
@@ -18,7 +18,7 @@ class Article
     // Création de la colonne Id
     public $id;
 
-    // Paramètre de la colonne Title de la table Article
+    // Paramètre de la colonne Title de la table Article, Type string qui devient Varchar 255
     /**
      * @ORM\Column(type="string")
      */
