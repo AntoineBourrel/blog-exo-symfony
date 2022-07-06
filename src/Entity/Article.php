@@ -47,6 +47,23 @@ class Article
     // déclaration de la colonne isPublished
     public $author;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $publishedAt;
+
+    public function getPublishedAt(): ?\DateTimeInterface
+    {
+        return $this->publishedAt;
+    }
+
+    public function setPublishedAt(\DateTimeInterface $publishedAt): self
+    {
+        $this->publishedAt = $publishedAt;
+
+        return $this;
+    }
+
 }
 
 //créer la base de donnée
@@ -56,3 +73,6 @@ class Article
 // php bin/console make:migration
 // si sucess
 //php bin/console doctrine:migration:migrate
+
+//Sinon par la console de commande
+// php bin/console make:entity
