@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-// Déclaration de création d'entité dans la table via class
+// Déclaration de création d'une class qui sera une entité via ORM
 /**
  * @ORM\Entity()
  */
@@ -28,7 +28,7 @@ class Article
 
 }
 
-//créer la table
+//créer la base de donnée
 // php bin/console doctrine:database:create
 
 //update de la table
