@@ -26,6 +26,27 @@ class Article
     // déclaration de la colonne Title
     public $title;
 
+    // Paramètre de la colonne Image de la table Article, Type string qui devient Varchar 255
+    /**
+     * @ORM\Column(type="string")
+     */
+    // déclaration de la colonne image
+    public $image;
+
+    // Paramètre de la colonne IsPublished de la table Article, Type booléen
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    // déclaration de la colonne isPublished
+    public $isPublished;
+
+    // Paramètre de la colonne author de la table Article, Type string qui devient Varchar 255
+    /**
+     * @ORM\Column(type="string")
+     */
+    // déclaration de la colonne isPublished
+    public $author;
+
 }
 
 //créer la base de donnée
