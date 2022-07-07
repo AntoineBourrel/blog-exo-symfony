@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +11,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class categoryController extends AbstractController
 {
+    //création de la route vers un category
+    /**
+     * @Route ("/category", name="category")
+     */
+    public function showCategory(CategoryRepository $CategoryRepository)
+    {
+        // La classe Repository me permet de faire des 'SELECT' dans la table associée
+        // La méthode permet de récupérer un élément en fonction de son id
+        $category = $CategoryRepository->find(1);
+        dd($category);
+    }
     // Création de la route insert-category
     /**
      * @Route ("/insert-category", name="insert_category")
