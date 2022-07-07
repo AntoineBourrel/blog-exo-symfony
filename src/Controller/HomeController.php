@@ -25,7 +25,7 @@ class HomeController extends AbstractController
             return $this->render('error.html.twig');
             } else {
             return $this->render('home.html.twig',[
-               'lastArticles' => array_reverse($articles)
+               'lastArticles' => $articles
             ]);
         }
 
