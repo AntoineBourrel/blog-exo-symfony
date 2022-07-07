@@ -12,16 +12,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
-    //création de la route vers un category
+    //création de la route vers une category
     /**
-     * @Route ("/category", name="category")
+     * @Route ("/category/{id}", name="category")
      */
-    public function showCategory(CategoryRepository $categoryRepository)
+    public function showCategory(CategoryRepository $categoryRepository, $id)
     {
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer un élément en fonction de son id
-        $category = $categoryRepository->find(1);
-        dd($category);
+        $category = $categoryRepository->find($id);
+        return $this->render('show-category.html.twig', [
+            'category' => $category
+        ]);
     }
     //création de la route vers la liste de category
     /**
@@ -32,7 +34,9 @@ class CategoryController extends AbstractController
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer tous les éléments d'une table
         $categories = $categoryRepository->findAll();
-        dd($categories);
+        return $this->render('list-category.html.twig', [
+            'categories' => $categories
+        ]);
     }
 
     // Création de la route insert-category
@@ -45,9 +49,9 @@ class CategoryController extends AbstractController
 
         // Appel d'une instance de l'objet Category et déclaration des paramètres de cette instance
         $category = new Category();
-        $category->setTitle("Le php c'est de la merde");
-        $category->setColor("brown");
-        $category->setDescription("Le php c'est de la grosse merde !");
+        $category->setTitle("Le HTLM pour Mongoliens");
+        $category->setColor("red");
+        $category->setDescription("Le HTML n'est pas un language de programmation !");
         $category->setIsPublished(true);
 
 

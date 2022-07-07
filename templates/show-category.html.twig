@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block main %}
+    <div class="article" style="color: {{ category.color }};">
+        <h2>{{ category.title }}</h2>
+        <p>{{ category.description }}</p>
+    </div>
+
+{% endblock %}
