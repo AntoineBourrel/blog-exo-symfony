@@ -14,13 +14,13 @@ class ListController extends AbstractController
 {
     //création de la route vers un article
     /**
-     * @Route ("/article", name="article")
+     * @Route ("/article/{id}", name="article")
      */
-    public function showArticle(ArticleRepository $articleRepository)
+    public function showArticle(ArticleRepository $articleRepository, $id)
     {
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer tous les éléments d'une table
-        $article = $articleRepository->find(1);
+        $article = $articleRepository->find($id);
         return $this->render('show_article.html.twig',[
             'article' => $article
         ]);
