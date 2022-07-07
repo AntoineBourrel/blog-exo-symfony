@@ -62,6 +62,25 @@ class ListController extends AbstractController
         $entityManager->flush();
 
         dd($article);
+    }
+
+    // déclaration de route vers la méthode 'articleDelete'
+    /**
+     * @Route ("/article/delete/{id}", name="article_delete")
+     */
+    public function articleDelete($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
+    {
+        $article = $articleRepository->find($id);
+        // Je vérifie si $article est null
+        if(!is_null($article)){
+            //Je supprime $article de la bdd
+            $entityManager->remove($article);
+            $entityManager->flush();
+
+            return new Response('Supprimé');
+        }
+        // Puisque $article est null, l'article à déjà était supprimé
+        return new Response('Déjà Supprimé');
 
     }
 }
