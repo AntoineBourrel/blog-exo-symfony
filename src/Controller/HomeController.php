@@ -14,15 +14,15 @@ class HomeController extends AbstractController
     /**
      * @Route ("/", name="home")
      */
-
+    // Méthode pour récupérer les articles dans la bdd + traitement formulaire d'age
     public function home(Request $request, ArticleRepository $articleRepository){
-
+        // Récupération des informations dans la bdd
         $articles = $articleRepository->findAll();
-
+        // Traitement pour n'avoir que les 3 derniers articles de la bdd
         $articlesCount = count($articles);
         $lastArticles = array_reverse(array_slice($articles, ($articlesCount - 3)));
 
-
+        // Vérification age + condition en fonction du nombre d'articles dans la bdd
         if (($request->query->has('age')) && ($request->query->get('age') < 18)) {
             return $this->render('error.html.twig');
         } else {
