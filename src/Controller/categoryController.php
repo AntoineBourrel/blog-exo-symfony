@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,6 +23,8 @@ class CategoryController extends AbstractController
         $category = $categoryRepository->find(1);
         dd($category);
     }
+
+
     // Création de la route insert-category
     /**
      * @Route ("/insert-category", name="insert_category")

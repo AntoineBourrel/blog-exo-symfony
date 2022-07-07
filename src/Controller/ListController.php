@@ -23,6 +23,19 @@ class ListController extends AbstractController
         $article = $articleRepository->find(1);
         dd($article);
     }
+
+    //création de la route vers la liste d'article
+    /**
+     * @Route ("/list", name="list")
+     */
+    public function listArticles(ArticleRepository $articleRepository)
+    {
+        // La classe Repository me permet de faire des 'SELECT' dans la table associée
+        // La méthode permet de récupérer un élément en fonction de son id
+        $articles = $articleRepository->findAll();
+        dd($articles);
+    }
+    
     // Création de la route insert-article
     /**
      * @Route ("/insert-article", name="insert_article")
