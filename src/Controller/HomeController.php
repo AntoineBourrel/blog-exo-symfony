@@ -15,9 +15,8 @@ class HomeController extends AbstractController
      * @Route ("/", name="home")
      */
 
-    public function home(Request $request){
+    public function home(Request $request, ArticleRepository $articleRepository){
 
-        $articleRepository = new ArticleRepository();
         $articles = $articleRepository->findAll();
 
         $articlesCount = count($articles);
@@ -27,9 +26,16 @@ class HomeController extends AbstractController
         if (($request->query->has('age')) && ($request->query->get('age') < 18)) {
             return $this->render('error.html.twig');
         } else {
-            return $this->render('home.html.twig', [
-                'lastArticles' => $lastArticles
-            ]);
+            if($articlesCount <= 3){
+                return $this->render('home.html.twig',[
+                   'lastArticles' => array_reverse($articles)
+                ]);
+            }else{
+                return $this->render('home.html.twig', [
+                    'lastArticles' => $lastArticles
+                ]);
+            }
+
         }
 
     }
