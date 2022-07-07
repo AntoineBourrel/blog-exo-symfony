@@ -23,7 +23,17 @@ class CategoryController extends AbstractController
         $category = $categoryRepository->find(1);
         dd($category);
     }
-
+    //création de la route vers la liste de category
+    /**
+     * @Route ("/list-category", name="list_category")
+     */
+    public function listCategory(CategoryRepository $categoryRepository)
+    {
+        // La classe Repository me permet de faire des 'SELECT' dans la table associée
+        // La méthode permet de récupérer tous les éléments d'une table
+        $categories = $categoryRepository->findAll();
+        dd($categories);
+    }
 
     // Création de la route insert-category
     /**

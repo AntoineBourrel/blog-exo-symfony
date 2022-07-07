@@ -19,7 +19,7 @@ class ListController extends AbstractController
     public function showArticle(ArticleRepository $articleRepository)
     {
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
-        // La méthode permet de récupérer un élément en fonction de son id
+        // La méthode permet de récupérer tous les éléments d'une table
         $article = $articleRepository->find(1);
         dd($article);
     }
@@ -35,7 +35,7 @@ class ListController extends AbstractController
         $articles = $articleRepository->findAll();
         dd($articles);
     }
-    
+
     // Création de la route insert-article
     /**
      * @Route ("/insert-article", name="insert_article")
