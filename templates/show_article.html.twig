@@ -13,8 +13,7 @@
     <div class="article">
         <img src="{{ article.image }}" alt="image">
         <h2>{{ article.title }}</h2>
-        <p>{{ article.description }}</p>
-        <p>publié le : {{ article.publishedAt|date("d/m/Y") }}</p>
+        <p>{{ article.content }}</p>
         <p>auteur : {{ article.author }}</p>
     </div>
 

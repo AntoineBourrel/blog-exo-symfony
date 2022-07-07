@@ -21,7 +21,9 @@ class ListController extends AbstractController
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer tous les éléments d'une table
         $article = $articleRepository->find(1);
-        dd($article);
+        return $this->render('show_article.html.twig',[
+            'article' => $article
+        ]);
     }
 
     //création de la route vers la liste d'article
@@ -33,7 +35,9 @@ class ListController extends AbstractController
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer un élément en fonction de son id
         $articles = $articleRepository->findAll();
-        dd($articles);
+        return $this->render('list.html.twig',[
+            'articles' => $articles
+        ]);
     }
 
     // Création de la route insert-article
