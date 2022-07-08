@@ -86,6 +86,21 @@ article img{
     background-color: white;
 }
 
+.category{
+    list-style: none;
+}
+
+.category li{
+    background-color: white;
+    border: 1px solid black;
+    padding: 2rem;
+}
+
+.category li a{
+    text-transform: uppercase;
+    font-style: inherit;
+}
+
 footer{
     border: 1px solid black;
     background-color: black;

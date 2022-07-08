@@ -6,10 +6,10 @@
     </section>
 
     <section>
-        <ul>
+        <ul class="category">
             {% for category in categories %}
                 {% if category.isPublished %}
-                    <li><a class="category" href="{{ path('admin_category', {'id' : category.id }) }}" style="color: {{ category.color }};">{{ category.title }}</a>
+                    <li><a href="{{ path('admin_category', {'id' : category.id }) }}" style="color: {{ category.color }};">{{ category.title }}</a>
                         <a class="btn" href="{{ path('admin_category_delete', {'id' : category.id}) }}">Supprimer</a>
                         <a class="btn" href="{{ path('admin_category_update', {'id' : category.id}) }}">Update</a></li>
                     <br>
