@@ -92,12 +92,12 @@ class ListController extends AbstractController
         $article = $articleRepository->find($id);
         // Valeurs de l'objet article à mettre à jour
         $article->setTitle("Chien Débile");
-        $article->setContent("le chien qui fait de rantanplan un génie !");
+        $article->setContent("le chien qui fait de rantanplan un génie ! C'est dire !");
         $article->setImage('https://i.skyrock.net/9594/31129594/pics/1360366600_small.jpg');
         // écriture en base de donnée
         $entityManager->persist($article);
         $entityManager->flush();
 
-        return new Response('OK');
+        return $this->redirectToRoute('home');
     }
 }
