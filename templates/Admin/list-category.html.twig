@@ -1,13 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    {% for category in categories %}
-        {% if category.isPublished %}
-            <a class="category" href="{{ path('admin_category', {'id' : category.id }) }}" style="color: {{ category.color }};">{{ category.title }}</a>
-            <a class="btn" href="{{ path('admin_category_delete', {'id' : category.id}) }}">Supprimer</a>
-            <br>
-        {% else %}
-            <p>Cette catégorie n'est pas encore publiée</p>
-        {% endif %}
-    {% endfor %}
+    <section>
+        <a class="btn" href="{{ path('admin_insert_category') }}">Créer une nouvelle catégorie</a>
+    </section>
+
+    <section>
+        <ul>
+            {% for category in categories %}
+                {% if category.isPublished %}
+                    <li><a class="category" href="{{ path('admin_category', {'id' : category.id }) }}" style="color: {{ category.color }};">{{ category.title }}</a>
+                        <a class="btn" href="{{ path('admin_category_delete', {'id' : category.id}) }}">Supprimer</a></li>
+                    <br>
+                {% else %}
+                    <p>Cette catégorie n'est pas encore publiée</p>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+    </section>
+
 {% endblock %}

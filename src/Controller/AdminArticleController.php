@@ -61,7 +61,7 @@ class AdminArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
-        dd($article);
+        return $this->redirectToRoute('admin_list');
     }
 
     // déclaration de route vers la méthode 'articleDelete'

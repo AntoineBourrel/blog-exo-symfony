@@ -5,15 +5,23 @@
 {% endblock %}
 
 {% block main %}
-    {% for article in articles %}
-        {% if article.isPublished %}
-            <a href="{{ path('admin_article', {'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
-            <a class="btn" href="{{ path('admin_article_delete', {'id' : article.id}) }}">Supprimer</a>
-            <a class="btn" href="{{ path('admin_article_update', {'id' : article.id}) }}">Update</a>
-        {% else %}
-            <p>Cette article n'est pas encore publiée</p>
-        {% endif %}
-    {% endfor %}
+
+    <section>
+        <a class="btn" href="{{ path('admin_insert_article') }}">Créer un nouvel article</a>
+    </section>
+
+    <section>
+        {% for article in articles %}
+            {% if article.isPublished %}
+                <a href="{{ path('admin_article', {'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
+                <a class="btn" href="{{ path('admin_article_delete', {'id' : article.id}) }}">Supprimer</a>
+                <a class="btn" href="{{ path('admin_article_update', {'id' : article.id}) }}">Update</a>
+            {% else %}
+                <p>Cette article n'est pas encore publiée</p>
+            {% endif %}
+        {% endfor %}
+    </section>
+
 {% endblock %}
 
 {% block footer %}
