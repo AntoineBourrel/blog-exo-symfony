@@ -61,7 +61,7 @@ class AdminArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
-        $this->addFlash('sucess', 'Vous avez bien ajouté votre article');
+        $this->addFlash('success', 'Vous avez bien ajouté votre article');
 
         return $this->redirectToRoute('admin_list');
     }
@@ -79,12 +79,12 @@ class AdminArticleController extends AbstractController
             $entityManager->remove($article);
             $entityManager->flush();
 
-            $this->addFlash('sucess', 'Vous avez bien supprimé votre article');
-
+            $this->addFlash('success', 'Vous avez bien supprimé votre article');
             return $this->redirectToRoute('admin_list');
         }
         // Puisque $article est null, l'article à déjà était supprimé
-        return new Response('Déjà Supprimé');
+        $this->addFlash('error', 'Article introuvable');
+        return $this->redirectToRoute('admin_list');
 
     }
     // Création de la route vers la méthode "articleUpdate"
@@ -103,7 +103,7 @@ class AdminArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
         // retour sur la page de liste d'articles
-        $this->addFlash('sucess', 'Vous avez bien modifié votre article');
+        $this->addFlash('success', 'Vous avez bien modifié votre article');
         return $this->redirectToRoute('admin_list');
     }
 }

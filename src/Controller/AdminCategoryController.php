@@ -57,7 +57,7 @@ class AdminCategoryController extends AbstractController
         //Envoie vers la base de données avec persist qui finis avec son flush
         $entityManager->persist($category);
         $entityManager->flush();
-        $this->addFlash('sucess', 'Vous avez bien ajouté votre catégorie');
+        $this->addFlash('success', 'Vous avez bien ajouté votre catégorie');
         return $this->redirectToRoute('admin_list_category');
     }
 
@@ -74,11 +74,12 @@ class AdminCategoryController extends AbstractController
             $entityManager->remove($category);
             $entityManager->flush();
 
-            $this->addFlash('sucess', 'Vous avez bien supprimé votre catégorie');
+            $this->addFlash('success', 'Vous avez bien supprimé votre catégorie');
             return $this->redirectToRoute('admin_list_category');
         }
         // Puisque $article est null, la category à déjà était supprimé
-        return new Response('Déjà Supprimé');
+        $this->addFlash('error', 'catégorie introuvable');
+        return $this->redirectToRoute('admin_list_category');
 
     }
 
@@ -97,7 +98,7 @@ class AdminCategoryController extends AbstractController
         $entityManager->persist($category);
         $entityManager->flush();
         // retour sur la page de liste de catégories
-        $this->addFlash('sucess', 'Vous avez bien modifié votre catégorie');
+        $this->addFlash('success', 'Vous avez bien modifié votre catégorie');
         return $this->redirectToRoute('admin_list_category');
     }
 }

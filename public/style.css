@@ -19,6 +19,14 @@ a{
     color: black;
 }
 
+.message-success{
+    background-color: green;
+}
+
+.message-error{
+    background-color: red;
+}
+
 header{
     border: 1px solid black;
     background-color: black;
