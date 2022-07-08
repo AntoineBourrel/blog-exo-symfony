@@ -14,7 +14,7 @@ class ListController extends AbstractController
 {
     //création de la route vers un article
     /**
-     * @Route ("/article/{id}", name="article")
+     * @Route ("/admin/article/{id}", name="admin_article")
      */
     public function showArticle(ArticleRepository $articleRepository, $id)
     {
@@ -28,7 +28,7 @@ class ListController extends AbstractController
 
     //création de la route vers la liste d'article
     /**
-     * @Route ("/list", name="list")
+     * @Route ("/admin/list", name="admin_list")
      */
     public function listArticles(ArticleRepository $articleRepository)
     {
@@ -42,7 +42,7 @@ class ListController extends AbstractController
 
     // Création de la route insert-article
     /**
-     * @Route ("/insert-article", name="insert_article")
+     * @Route ("/admin/insert-article", name="admin_insert_article")
      */
     // Méthode pour insérer un article dans la base de donnée
     // avec appel d'une instance de l'objet EntityMangerInterface
@@ -66,7 +66,7 @@ class ListController extends AbstractController
 
     // déclaration de route vers la méthode 'articleDelete'
     /**
-     * @Route ("/article/delete/{id}", name="article_delete")
+     * @Route ("/admin/article/delete/{id}", name="admin_article_delete")
      */
     public function articleDelete($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager)
     {
@@ -85,7 +85,7 @@ class ListController extends AbstractController
     }
     // Création de la route vers la méthode "articleUpdate"
     /**
-     * @Route ("/article/update/{id}", name="article_update")
+     * @Route ("/admin/article/update/{id}", name="admin_article_update")
      */
     public function articleUpdate($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager){
         // Sélection de l'article en fonction de l'id
@@ -94,6 +94,7 @@ class ListController extends AbstractController
         $article->setTitle("Chien Débile");
         $article->setContent("le chien qui fait de rantanplan un génie ! C'est dire !");
         $article->setImage('https://i.skyrock.net/9594/31129594/pics/1360366600_small.jpg');
+        $article->setAuthor('Philippe');
         // écriture en base de donnée
         $entityManager->persist($article);
         $entityManager->flush();

@@ -7,7 +7,7 @@
 {% block main %}
     {% for article in articles %}
         {% if article.isPublished %}
-            <a href="{{ path('article', {'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
+            <a href="{{ path('admin_article', {'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
         {% else %}
             <p>Cette article n'est pas encore publiée</p>
         {% endif %}

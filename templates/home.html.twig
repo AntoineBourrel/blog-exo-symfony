@@ -15,7 +15,7 @@
     <section id="article">
         {% for article in lastArticles %}
             {% if article.isPublished %}
-                <a href="{{ path('article', { 'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
+                <a href="{{ path('admin_article', { 'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
             {% endif %}
         {% endfor %}
     </section>
