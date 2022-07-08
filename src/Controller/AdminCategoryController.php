@@ -74,7 +74,7 @@ class AdminCategoryController extends AbstractController
             $entityManager->remove($category);
             $entityManager->flush();
 
-            return new Response('Supprimé');
+            return $this->redirectToRoute('admin_list_category');
         }
         // Puisque $article est null, la category à déjà était supprimé
         return new Response('Déjà Supprimé');

@@ -9,6 +9,7 @@
         {% if article.isPublished %}
             <a href="{{ path('admin_article', {'id' : article.id }) }}">{% include '_article.html.twig' %}</a>
             <a class="btn" href="{{ path('admin_article_delete', {'id' : article.id}) }}">Supprimer</a>
+            <a class="btn" href="{{ path('admin_article_update', {'id' : article.id}) }}">Update</a>
         {% else %}
             <p>Cette article n'est pas encore publiée</p>
         {% endif %}
