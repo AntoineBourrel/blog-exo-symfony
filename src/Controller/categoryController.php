@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Category;
-use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,6 +59,25 @@ class CategoryController extends AbstractController
         $entityManager->flush();
 
         dd($category);
+    }
+
+    // déclaration de route vers la méthode 'categoryDelete'
+    /**
+     * @Route ("/category/delete/{id}", name="category_delete")
+     */
+    public function categoryDelete($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
+    {
+        $category = $categoryRepository->find($id);
+        // Je vérifie si $category est null
+        if(!is_null($category)){
+            //Je supprime $category de la bdd
+            $entityManager->remove($category);
+            $entityManager->flush();
+
+            return new Response('Supprimé');
+        }
+        // Puisque $article est null, la category à déjà était supprimé
+        return new Response('Déjà Supprimé');
 
     }
 }
