@@ -9,38 +9,38 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class CategoryController extends AbstractController
+class AdminCategoryController extends AbstractController
 {
     //création de la route vers une category
     /**
-     * @Route ("/category/{id}", name="category")
+     * @Route ("/admin/category/{id}", name="admin_category")
      */
     public function showCategory(CategoryRepository $categoryRepository, $id)
     {
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer un élément en fonction de son id
         $category = $categoryRepository->find($id);
-        return $this->render('show-category.html.twig', [
+        return $this->render('Admin/show-category.html.twig', [
             'category' => $category
         ]);
     }
     //création de la route vers la liste de category
     /**
-     * @Route ("/list-category", name="list_category")
+     * @Route ("/admin/list-category", name="admin_list_category")
      */
     public function listCategory(CategoryRepository $categoryRepository)
     {
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer tous les éléments d'une table
         $categories = $categoryRepository->findAll();
-        return $this->render('list-category.html.twig', [
+        return $this->render('Admin/list-category.html.twig', [
             'categories' => $categories
         ]);
     }
 
     // Création de la route insert-category
     /**
-     * @Route ("/insert-category", name="insert_category")
+     * @Route ("/admin/insert-category", name="admin_insert_category")
      */
     // Méthode pour insérer une categorie dans la base de donnée
     // avec appel d'une instance de l'objet EntityMangerInterface
@@ -63,7 +63,7 @@ class CategoryController extends AbstractController
 
     // déclaration de route vers la méthode 'categoryDelete'
     /**
-     * @Route ("/category/delete/{id}", name="category_delete")
+     * @Route ("/admin/category/delete/{id}", name="admin_category_delete")
      */
     public function categoryDelete($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager)
     {

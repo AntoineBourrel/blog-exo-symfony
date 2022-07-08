@@ -3,10 +3,10 @@
 {% block main %}
     {% for category in categories %}
         {% if category.isPublished %}
-            <a href="{{ path('category', {'id' : category.id }) }}" style="color: {{ category.color }};">{{ category.title }}</a>
+            <a href="{{ path('admin_category', {'id' : category.id }) }}" style="color: {{ category.color }};">{{ category.title }}</a>
             <br>
         {% else %}
-            <p>Cette categorie n'est pas encore publiée</p>
+            <p>Cette catégorie n'est pas encore publiée</p>
         {% endif %}
     {% endfor %}
 {% endblock %}
