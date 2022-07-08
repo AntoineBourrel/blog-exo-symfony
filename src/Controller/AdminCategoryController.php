@@ -80,4 +80,22 @@ class AdminCategoryController extends AbstractController
         return new Response('Déjà Supprimé');
 
     }
+
+    // Création de la route vers la méthode "categoryUpdate"
+    /**
+     * @Route ("/admin/category/update/{id}", name="admin_category_update")
+     */
+    public function categoryUpdate($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager){
+        // Sélection de l'article en fonction de l'id
+        $category = $categoryRepository->find($id);
+        // Valeurs de l'objet category à mettre à jour
+        $category->setTitle("Le python pour les con");
+        $category->setDescription("le python c'est pour les abrutis finis");
+        $category->setColor("blue");
+        // écriture en base de donnée
+        $entityManager->persist($category);
+        $entityManager->flush();
+        // retour sur la page de liste de catégories
+        return $this->redirectToRoute('admin_list_category');
+    }
 }

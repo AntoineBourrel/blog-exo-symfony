@@ -98,7 +98,7 @@ class AdminArticleController extends AbstractController
         // écriture en base de donnée
         $entityManager->persist($article);
         $entityManager->flush();
-        // retour sur la page d'accueil
-        return $this->redirectToRoute('home');
+        // retour sur la page de liste d'articles
+        return $this->redirectToRoute('admin_list');
     }
 }
