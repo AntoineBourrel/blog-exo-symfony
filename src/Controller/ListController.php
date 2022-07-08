@@ -83,4 +83,19 @@ class ListController extends AbstractController
         return new Response('Déjà Supprimé');
 
     }
+    // Création de la route vers la méthode "articleUpdate"
+    /**
+     * @Route ("/article/update/{id}", name="article_update")
+     */
+    public function articleUpdate($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager){
+        // Sélection de l'article en fonction de l'id
+        $article = $articleRepository->find($id);
+        // Valeurs de l'objet article à mettre à jour
+        $article->setTitle("Chien Débile");
+        // écriture en base de donnée
+        $entityManager->persist($article);
+        $entityManager->flush();
+
+        return new Response('OK');
+    }
 }
