@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-class ListController extends AbstractController
+class AdminArticleController extends AbstractController
 {
     //création de la route vers un article
     /**
@@ -21,7 +21,7 @@ class ListController extends AbstractController
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer tous les éléments d'une table
         $article = $articleRepository->find($id);
-        return $this->render('show_article.html.twig',[
+        return $this->render('Admin/show_article.html.twig',[
             'article' => $article
         ]);
     }
@@ -35,7 +35,7 @@ class ListController extends AbstractController
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer un élément en fonction de son id
         $articles = $articleRepository->findAll();
-        return $this->render('list.html.twig',[
+        return $this->render('Admin/list.html.twig',[
             'articles' => $articles
         ]);
     }
