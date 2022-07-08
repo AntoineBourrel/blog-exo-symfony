@@ -61,6 +61,8 @@ class AdminArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
 
+        $this->addFlash('sucess', 'Vous avez bien ajouté votre article');
+
         return $this->redirectToRoute('admin_list');
     }
 
@@ -76,6 +78,8 @@ class AdminArticleController extends AbstractController
             //Je supprime $article de la bdd
             $entityManager->remove($article);
             $entityManager->flush();
+
+            $this->addFlash('sucess', 'Vous avez bien supprimé votre article');
 
             return $this->redirectToRoute('admin_list');
         }
@@ -99,6 +103,7 @@ class AdminArticleController extends AbstractController
         $entityManager->persist($article);
         $entityManager->flush();
         // retour sur la page de liste d'articles
+        $this->addFlash('sucess', 'Vous avez bien modifié votre article');
         return $this->redirectToRoute('admin_list');
     }
 }
