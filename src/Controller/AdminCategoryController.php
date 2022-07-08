@@ -58,7 +58,7 @@ class AdminCategoryController extends AbstractController
         $entityManager->persist($category);
         $entityManager->flush();
 
-        dd($category);
+        return $this->redirectToRoute('admin_list_category');
     }
 
     // déclaration de route vers la méthode 'categoryDelete'
