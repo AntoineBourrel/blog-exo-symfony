@@ -49,17 +49,19 @@ class AdminArticleController extends AbstractController
     // avec appel d'une instance de l'objet EntityMangerInterface
     public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
-
+        // Récupération des valeurs du formulaire
         $title = $request->query->get('title');
         $content = $request->query->get('content');
         $image = $request->query->get('image');
         $author = $request->query->get('author');
 
+        // Vérification si les valeurs 'get' existe
         if($request->query->has('title') &&
             $request->query->has('content') &&
             $request->query->has('image') &&
             $request->query->has('author'))
         {
+            // Vérification si les valeurs 'get' sont vides
             if (!empty($title) &&
                 !empty($content) &&
                 !empty($image) &&
@@ -82,9 +84,11 @@ class AdminArticleController extends AbstractController
 
                 return $this->redirectToRoute('admin_list');
             }
+            // Erreur en cas de valeurs vide
             $this->addFlash('error', 'Merci de remplir les champs ci-dessous');
             return $this->render('admin/insert-article.html.twig');
         }
+        // Si les valeurs n'existe pas, affichage de la page du formulaire
         return $this->render('Admin/insert-article.html.twig');
     }
 
@@ -114,18 +118,19 @@ class AdminArticleController extends AbstractController
      * @Route ("/admin/article/update/{id}", name="admin_article_update")
      */
     public function articleUpdate($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request){
-
+        // Récupération des valeurs du formulaire
         $title = $request->query->get('title');
         $content = $request->query->get('content');
         $image = $request->query->get('image');
 
         // Sélection de l'article en fonction de l'id
         $article = $articleRepository->find($id);
-
+        // Vérification si les valeurs 'get' existe
         if($request->query->has('title') &&
             $request->query->has('content') &&
             $request->query->has('image'))
         {
+            // Vérification si les valeurs 'get' sont vides
             if (!empty($title) &&
                 !empty($content) &&
                 !empty($image)
@@ -141,10 +146,12 @@ class AdminArticleController extends AbstractController
                 $this->addFlash('success', 'Vous avez bien modifié votre article');
                 return $this->redirectToRoute('admin_list');
             } else {
+                // Erreur en cas de valeurs vide
                 $this->addFlash('error', 'Veuillez remplir les champs obligatoires');
                 return $this->redirectToRoute('admin_list');
             }
         }
+        // Si les valeurs n'existe pas, affichage de la page du formulaire
         return $this->render('Admin/article-update.html.twig', [
             'article' => $article
         ]);

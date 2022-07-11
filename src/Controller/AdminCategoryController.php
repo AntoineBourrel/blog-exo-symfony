@@ -47,10 +47,14 @@ class AdminCategoryController extends AbstractController
     // avec appel d'une instance de l'objet EntityMangerInterface
     public function insertCategory(EntityManagerInterface $entityManager, Request $request){
 
+
+        // Récupération des valeurs du formulaire
         $title = $request->query->get('title');
         $color = $request->query->get('color');
 
+        // Vérification si les valeurs 'get' existe
         if($request->query->has('title') && $request->query->has('color')){
+            // Vérification si les valeurs 'get' sont vides
             if (!empty($title) &&
                 !empty($color)
             ) {
@@ -66,9 +70,11 @@ class AdminCategoryController extends AbstractController
                 $this->addFlash('success', 'Vous avez bien ajouté votre catégorie');
                 return $this->redirectToRoute('admin_list_category');
             }
+            // Erreur en cas de valeurs vide
             $this->addFlash('error', 'Merci de remplir le titre et la couleur!');
             return $this->render('admin/insert-category.html.twig');
         }
+        // Si les valeurs n'existe pas, affichage de la page du formulaire
         return $this->render('Admin/insert-category.html.twig');
     }
 
@@ -100,12 +106,14 @@ class AdminCategoryController extends AbstractController
     public function categoryUpdate($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request){
         // Sélection de l'article en fonction de l'id
         $category = $categoryRepository->find($id);
-
+        // Récupération des valeurs du formulaire
         $title = $request->query->get('title');
         $color = $request->query->get('color');
         $description = $request->query->get('description');
 
+        // Vérification si les valeurs 'get' existe
         if($request->query->has('title') && $request->query->has('color')){
+            // Vérification si les valeurs 'get' sont vides
             if (!empty($title) &&
                 !empty($color)
             ) {
@@ -120,10 +128,12 @@ class AdminCategoryController extends AbstractController
                 $this->addFlash('success', 'Vous avez bien modifié votre catégorie');
                 return $this->redirectToRoute('admin_list_category');
             } else {
+                // Erreur en cas de valeurs vide
                 $this->addFlash('error', 'Merci de remplir le titre et la couleur!');
                 return $this->redirectToRoute('admin_list_category');
             }
         }
+        // Si les valeurs n'existe pas, affichage de la page du formulaire
         return $this->render('Admin/category-update.html.twig', [
             'category' => $category
         ]);
