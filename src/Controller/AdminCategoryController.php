@@ -58,7 +58,7 @@ class AdminCategoryController extends AbstractController
             if (!empty($title) &&
                 !empty($color)
             ) {
-                // Appel d'une instance de l'objet Category et déclaration des paramètres de cette instance
+                // Création d'une instance de l'objet Category et déclaration des paramètres de cette instance
                 $category = new Category();
                 $category->setTitle($title);
                 $category->setColor($color);

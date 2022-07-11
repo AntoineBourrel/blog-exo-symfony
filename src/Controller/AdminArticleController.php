@@ -67,7 +67,7 @@ class AdminArticleController extends AbstractController
                 !empty($image) &&
                 !empty($author)
             ) {
-                // Appel d'une instance de l'objet Article et déclaration des paramètres de cette instance
+                // Création d'une instance de l'objet Article et déclaration des paramètres de cette instance
                 $article = new Article();
                 $article->setTitle($title);
                 $article->setContent($content);
