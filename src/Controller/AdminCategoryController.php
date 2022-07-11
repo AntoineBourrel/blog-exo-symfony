@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -44,21 +45,34 @@ class AdminCategoryController extends AbstractController
      */
     // Méthode pour insérer une categorie dans la base de donnée
     // avec appel d'une instance de l'objet EntityMangerInterface
-    public function insertCategory(EntityManagerInterface $entityManager){
+    public function insertCategory(EntityManagerInterface $entityManager, Request $request){
 
-        // Appel d'une instance de l'objet Category et déclaration des paramètres de cette instance
-        $category = new Category();
-        $category->setTitle("Le HTLM pour Mongoliens");
-        $category->setColor("red");
-        $category->setDescription("Le HTML n'est pas un language de programmation !");
-        $category->setIsPublished(true);
+        $title = $request->query->get('title');
+        $color = $request->query->get('color');
+
+        if($request->query->has('title') && $request->query->has('color')){
+            if (!empty($title) &&
+                !empty($color)
+            ) {
+                // Appel d'une instance de l'objet Category et déclaration des paramètres de cette instance
+                $category = new Category();
+                $category->setTitle($title);
+                $category->setColor($color);
+                $category->setIsPublished(true);
+
+                //Envoie vers la base de données avec persist qui finis avec son flush
+                $entityManager->persist($category);
+                $entityManager->flush();
+                $this->addFlash('success', 'Vous avez bien ajouté votre catégorie');
+                return $this->redirectToRoute('admin_list_category');
+            }
+            $this->addFlash('error', 'Merci de remplir le titre et la couleur!');
+            return $this->render('admin/insert-category.html.twig');
+        }
+        return $this->render('Admin/insert-category.html.twig');
 
 
-        //Envoie vers la base de données avec persist qui finis avec son flush
-        $entityManager->persist($category);
-        $entityManager->flush();
-        $this->addFlash('success', 'Vous avez bien ajouté votre catégorie');
-        return $this->redirectToRoute('admin_list_category');
+
     }
 
     // déclaration de route vers la méthode 'categoryDelete'

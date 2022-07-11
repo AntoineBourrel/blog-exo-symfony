@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -21,7 +22,7 @@ class AdminArticleController extends AbstractController
         // La classe Repository me permet de faire des 'SELECT' dans la table associée
         // La méthode permet de récupérer tous les éléments d'une table
         $article = $articleRepository->find($id);
-        return $this->render('Admin/show_article.html.twig',[
+        return $this->render('Admin/show-article.html.twig',[
             'article' => $article
         ]);
     }
@@ -46,24 +47,43 @@ class AdminArticleController extends AbstractController
      */
     // Méthode pour insérer un article dans la base de donnée
     // avec appel d'une instance de l'objet EntityMangerInterface
-    public function insertArticle(EntityManagerInterface $entityManager)
+    public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
 
-        // Appel d'une instance de l'objet Article et déclaration des paramètres de cette instance
-        $article = new Article();
-        $article->setTitle("Chat Mignon");
-        $article->setContent("ouuuuh qu'il est ce petit chat ? Que je je lui roule dessus");
-        $article->setIsPublished(true);
-        $article->setImage('https://static.wamiz.com/images/upload/15876197_1368431473208290_144086124032163840_n(1).jpg');
-        $article->setAuthor('Maurice');
+        $title = $request->query->get('title');
+        $content = $request->query->get('content');
+        $image = $request->query->get('image');
+        $author = $request->query->get('author');
 
-        //Envoie vers la base de données avec persist qui finis avec son flush
-        $entityManager->persist($article);
-        $entityManager->flush();
+        if($request->query->has('title') &&
+            $request->query->has('content') &&
+            $request->query->has('image') &&
+            $request->query->has('author'))
+        {
+            if (!empty($title) &&
+                !empty($content)
+            ) {
+                // Appel d'une instance de l'objet Article et déclaration des paramètres de cette instance
+                $article = new Article();
+                $article->setTitle($title);
+                $article->setContent($content);
+                $article->setImage($image);
+                $article->setAuthor($author);
+                $article->setIsPublished(true);
 
-        $this->addFlash('success', 'Vous avez bien ajouté votre article');
 
-        return $this->redirectToRoute('admin_list');
+                //Envoie vers la base de données avec persist qui finis avec son flush
+                $entityManager->persist($article);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Vous avez bien ajouté votre article');
+
+                return $this->redirectToRoute('admin_list');
+            }
+            $this->addFlash('error', 'Merci de remplir les champs ci-dessous');
+            return $this->render('admin/insert-article.html.twig');
+        }
+        return $this->render('Admin/insert-article.html.twig');
     }
 
     // déclaration de route vers la méthode 'articleDelete'
