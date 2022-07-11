@@ -70,9 +70,6 @@ class AdminCategoryController extends AbstractController
             return $this->render('admin/insert-category.html.twig');
         }
         return $this->render('Admin/insert-category.html.twig');
-
-
-
     }
 
     // déclaration de route vers la méthode 'categoryDelete'
@@ -94,25 +91,40 @@ class AdminCategoryController extends AbstractController
         // Puisque $article est null, la category à déjà était supprimé
         $this->addFlash('error', 'catégorie introuvable');
         return $this->redirectToRoute('admin_list_category');
-
     }
 
     // Création de la route vers la méthode "categoryUpdate"
     /**
      * @Route ("/admin/category/update/{id}", name="admin_category_update")
      */
-    public function categoryUpdate($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager){
+    public function categoryUpdate($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request){
         // Sélection de l'article en fonction de l'id
         $category = $categoryRepository->find($id);
-        // Valeurs de l'objet category à mettre à jour
-        $category->setTitle("Le python pour les con");
-        $category->setDescription("le python c'est pour les abrutis finis");
-        $category->setColor("blue");
-        // écriture en base de donnée
-        $entityManager->persist($category);
-        $entityManager->flush();
-        // retour sur la page de liste de catégories
-        $this->addFlash('success', 'Vous avez bien modifié votre catégorie');
-        return $this->redirectToRoute('admin_list_category');
+
+        $title = $request->query->get('title');
+        $color = $request->query->get('color');
+
+        if($request->query->has('title') && $request->query->has('color')){
+            if (!empty($title) &&
+                !empty($color)
+            ) {
+                // Valeurs de l'objet category à mettre à jour
+                $category->setTitle($title);
+                $category->setColor($color);
+                // écriture en base de donnée
+                $entityManager->persist($category);
+                $entityManager->flush();
+                // retour sur la page de liste de catégories
+                $this->addFlash('success', 'Vous avez bien modifié votre catégorie');
+                return $this->redirectToRoute('admin_list_category');
+            } else {
+                $this->addFlash('error', 'Merci de remplir le titre et la couleur!');
+                return $this->redirectToRoute('admin_list_category');
+            }
+        }
+        return $this->render('Admin/category-update.html.twig', [
+            'category' => $category
+        ]);
+
     }
 }

@@ -61,7 +61,9 @@ class AdminArticleController extends AbstractController
             $request->query->has('author'))
         {
             if (!empty($title) &&
-                !empty($content)
+                !empty($content) &&
+                !empty($image) &&
+                !empty($author)
             ) {
                 // Appel d'une instance de l'objet Article et déclaration des paramètres de cette instance
                 $article = new Article();
@@ -111,19 +113,43 @@ class AdminArticleController extends AbstractController
     /**
      * @Route ("/admin/article/update/{id}", name="admin_article_update")
      */
-    public function articleUpdate($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager){
+    public function articleUpdate($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request){
+
+        $title = $request->query->get('title');
+        $content = $request->query->get('content');
+        $image = $request->query->get('image');
+
         // Sélection de l'article en fonction de l'id
         $article = $articleRepository->find($id);
-        // Valeurs de l'objet article à mettre à jour
-        $article->setTitle("Chien Débile");
-        $article->setContent("le chien qui fait de rantanplan un génie ! C'est dire !");
-        $article->setImage('https://i.skyrock.net/9594/31129594/pics/1360366600_small.jpg');
-        $article->setAuthor('Philippe');
-        // écriture en base de donnée
-        $entityManager->persist($article);
-        $entityManager->flush();
-        // retour sur la page de liste d'articles
-        $this->addFlash('success', 'Vous avez bien modifié votre article');
-        return $this->redirectToRoute('admin_list');
+
+        if($request->query->has('title') &&
+            $request->query->has('content') &&
+            $request->query->has('image'))
+        {
+            if (!empty($title) &&
+                !empty($content) &&
+                !empty($image)
+            ) {
+                // Valeurs de l'objet article à mettre à jour
+                $article->setTitle($title);
+                $article->setContent($content);
+                $article->setImage($image);
+                // écriture en base de donnée
+                $entityManager->persist($article);
+                $entityManager->flush();
+                // retour sur la page de liste d'articles
+                $this->addFlash('success', 'Vous avez bien modifié votre article');
+                return $this->redirectToRoute('admin_list');
+            } else {
+                $this->addFlash('error', 'Veuillez remplir les champs obligatoires');
+                return $this->redirectToRoute('admin_list');
+            }
+        }
+        return $this->render('Admin/article-update.html.twig', [
+            'article' => $article
+        ]);
+
+
+
     }
 }
