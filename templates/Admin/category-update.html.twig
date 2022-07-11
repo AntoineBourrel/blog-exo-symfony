@@ -1,19 +1,5 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <form action="{{ path('admin_category_update', {'id' : category.id}) }}" method="get">
-
-        <label for="title">Titre</label>
-        <input type="text" name="title">
-        <br>
-        <label for="title">Contenu</label>
-        <input type="color" name="color">
-        <br>
-        <label for="description">Description</label>
-        <br>
-        <textarea name="description" id="description" cols="30" rows="10"></textarea>
-        <br>
-        <input type="submit">
-
-    </form>
+    {{ form(form) }}
 {% endblock %}

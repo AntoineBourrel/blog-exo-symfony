@@ -1,23 +1,5 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-
-    <form action="{{ path('admin_article_update', {'id' : article.id}) }}" method="get">
-
-        <label for="title">Titre</label>
-        <input type="text" name="title">
-        <br>
-        <label for="content">Contenu</label>
-        <br>
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-        <br>
-        <label for="image">lien vers une image</label>
-        <input type="text" name="image">
-        <br>
-        <label for="author">Autheur</label>
-        <input type="text" name="author">
-        <br>
-        <input type="submit">
-
-    </form>
+    {{ form(form) }}
 {% endblock %}

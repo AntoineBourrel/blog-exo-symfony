@@ -52,6 +52,7 @@ class AdminArticleController extends AbstractController
     {
         // Création nouvelle instance d'Article
         $article = new Article();
+        $article->setIsPublished(true);
         // Création d'un formulaire lié à la table Article via ses paramètres lié à l'instance d'Article
         $form = $this->createForm(ArticleType::class, $article);
 
@@ -139,8 +140,33 @@ class AdminArticleController extends AbstractController
     /**
      * @Route ("/admin/article/update/{id}", name="admin_article_update")
      */
-    public function articleUpdate($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request){
-        // Récupération des valeurs du formulaire
+    public function articleUpdate($id, ArticleRepository $articleRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+        // Création nouvelle instance d'Article
+        $article = new Article();
+        $article->setIsPublished(true);
+        // Création d'un formulaire lié à la table Article via ses paramètres lié à l'instance d'Article
+        $form = $this->createForm(ArticleType::class, $article);
+
+        // On donne la variable form une instance de Request pour que le formulaire puisse
+        // récupérer les données et les traiter automatiquement
+        $form->handleRequest($request);
+
+        // Si le formulaire à été posté et que les données sont valides, on envoie sur la base de données
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($article);
+            $entityManager->flush();
+            $this->addFlash('success', 'Vous avez bien ajouté votre article');
+        }
+
+        return $this->render('Admin/article-update.html.twig', [
+            // Utilisation de la méthode createView pour créer la view du formulaire
+            'form' => $form->createView()
+        ]);
+
+
+
+        /* // Récupération des valeurs du formulaire
         $title = $request->query->get('title');
         $content = $request->query->get('content');
         $image = $request->query->get('image');
@@ -176,7 +202,7 @@ class AdminArticleController extends AbstractController
         // Si les valeurs n'existe pas, affichage de la page du formulaire
         return $this->render('Admin/article-update.html.twig', [
             'article' => $article
-        ]);
+        ]); */
 
 
 

@@ -17,7 +17,7 @@ class ArticleType extends AbstractType
             // Génère les inputs du formulaire
             ->add('title')
             ->add('image')
-            ->add('isPublished')
+            //->add('isPublished')
             ->add('author')
             ->add('content')
             ->add('submit', SubmitType::class)

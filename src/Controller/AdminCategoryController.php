@@ -50,6 +50,7 @@ class AdminCategoryController extends AbstractController
 
         // Création nouvelle instance de Category
         $category = new Category();
+        $category->setIsPublished(true);
         // Création d'un formulaire lié à la table Category via ses paramètres lié à l'instance de Category
         $form = $this->createForm(CategoryType::class, $category);
 
@@ -124,8 +125,34 @@ class AdminCategoryController extends AbstractController
     /**
      * @Route ("/admin/category/update/{id}", name="admin_category_update")
      */
-    public function categoryUpdate($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request){
-        // Sélection de l'article en fonction de l'id
+    public function categoryUpdate($id, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager, Request $request)
+    {
+        // Création nouvelle instance de Category
+        $category = new Category();
+        $category->setIsPublished(true);
+        // Création d'un formulaire lié à la table Category via ses paramètres lié à l'instance de Category
+        $form = $this->createForm(CategoryType::class, $category);
+
+        // On donne la variable form une instance de Request pour que le formulaire puisse
+        // récupérer les données et les traiter automatiquement
+        $form->handleRequest($request);
+
+        // Si le formulaire à été posté et que les données sont valides, on envoie sur la base de données
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($category);
+            $entityManager->flush();
+            $this->addFlash('success', 'Vous avez bien ajouté votre catégorie');
+        }
+
+        return $this->render('Admin/category-update.html.twig', [
+            // Utilisation de la méthode createView pour créer la view du formulaire
+            'form' => $form->createView()
+        ]);
+
+
+
+
+        /*// Sélection de l'article en fonction de l'id
         $category = $categoryRepository->find($id);
         // Récupération des valeurs du formulaire
         $title = $request->query->get('title');
@@ -157,7 +184,7 @@ class AdminCategoryController extends AbstractController
         // Si les valeurs n'existe pas, affichage de la page du formulaire
         return $this->render('Admin/category-update.html.twig', [
             'category' => $category
-        ]);
+        ]); */
 
     }
 }
