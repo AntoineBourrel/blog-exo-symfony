@@ -103,6 +103,7 @@ class AdminCategoryController extends AbstractController
 
         $title = $request->query->get('title');
         $color = $request->query->get('color');
+        $description = $request->query->get('description');
 
         if($request->query->has('title') && $request->query->has('color')){
             if (!empty($title) &&
@@ -111,6 +112,7 @@ class AdminCategoryController extends AbstractController
                 // Valeurs de l'objet category à mettre à jour
                 $category->setTitle($title);
                 $category->setColor($color);
+                $category->setDescription($description);
                 // écriture en base de donnée
                 $entityManager->persist($category);
                 $entityManager->flush();
