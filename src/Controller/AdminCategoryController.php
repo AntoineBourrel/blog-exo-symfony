@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,8 +48,17 @@ class AdminCategoryController extends AbstractController
     // avec appel d'une instance de l'objet EntityMangerInterface
     public function insertCategory(EntityManagerInterface $entityManager, Request $request){
 
+        // Création nouvelle instance de Category
+        $category = new Category();
+        // Création d'un formulaire lié à la table Category via ses paramètres lié à l'instance de Category
+        $form = $this->createForm(CategoryType::class, $category);
 
-        // Récupération des valeurs du formulaire
+        return $this->render('Admin/insert-category.html.twig', [
+            // Utilisation de la méthode createView pour créer la view du formulaire
+            'form' => $form->createView()
+        ]);
+
+        /* // Récupération des valeurs du formulaire
         $title = $request->query->get('title');
         $color = $request->query->get('color');
 
@@ -75,7 +85,7 @@ class AdminCategoryController extends AbstractController
             return $this->render('admin/insert-category.html.twig');
         }
         // Si les valeurs n'existe pas, affichage de la page du formulaire
-        return $this->render('Admin/insert-category.html.twig');
+        return $this->render('Admin/insert-category.html.twig'); */
     }
 
     // déclaration de route vers la méthode 'categoryDelete'

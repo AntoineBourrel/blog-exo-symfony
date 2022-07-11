@@ -1,22 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-
-    <form action="{{ path('admin_insert_article') }}" method="get">
-
-        <label for="title">Titre</label>
-        <input type="text" name="title">
-        <br>
-        <label for="content">Contenu</label>
-        <input type="text" name="content">
-        <br>
-        <label for="image">lien vers une image</label>
-        <input type="text" name="image">
-        <br>
-        <label for="author">Autheur</label>
-        <input type="text" name="author">
-        <br>
-        <input type="submit">
-
-    </form>
+    {# Utilisation de la function form pour générer le html du formulaire lié à la variable form #}
+    {{ form(form) }}
 {% endblock %}

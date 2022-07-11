@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,7 +50,17 @@ class AdminArticleController extends AbstractController
     // avec appel d'une instance de l'objet EntityMangerInterface
     public function insertArticle(EntityManagerInterface $entityManager, Request $request)
     {
-        // Récupération des valeurs du formulaire
+        // Création nouvelle instance d'Article
+        $article = new Article();
+        // Création d'un formulaire lié à la table Article via ses paramètres lié à l'instance d'Article
+        $form = $this->createForm(ArticleType::class, $article);
+
+        return $this->render('Admin/insert-article.html.twig', [
+            // Utilisation de la méthode createView pour créer la view du formulaire
+            'form' => $form->createView()
+        ]);
+
+        /* // Récupération des valeurs du formulaire
         $title = $request->query->get('title');
         $content = $request->query->get('content');
         $image = $request->query->get('image');
@@ -89,7 +100,7 @@ class AdminArticleController extends AbstractController
             return $this->render('admin/insert-article.html.twig');
         }
         // Si les valeurs n'existe pas, affichage de la page du formulaire
-        return $this->render('Admin/insert-article.html.twig');
+        return $this->render('Admin/insert-article.html.twig'); */
     }
 
     // déclaration de route vers la méthode 'articleDelete'
