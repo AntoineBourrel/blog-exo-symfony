@@ -55,6 +55,17 @@ class AdminArticleController extends AbstractController
         // Création d'un formulaire lié à la table Article via ses paramètres lié à l'instance d'Article
         $form = $this->createForm(ArticleType::class, $article);
 
+        // On donne la variable form une instance de Request pour que le formulaire puisse
+        // récupérer les données et les traiter automatiquement
+        $form->handleRequest($request);
+
+        // Si le formulaire à été posté et que les données sont valides, on envoie sur la base de données
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager->persist($article);
+            $entityManager->flush();
+            $this->addFlash('success', 'Vous avez bien ajouté votre article');
+        }
+
         return $this->render('Admin/insert-article.html.twig', [
             // Utilisation de la méthode createView pour créer la view du formulaire
             'form' => $form->createView()
