@@ -30,7 +30,7 @@ a{
 header{
     border: 1px solid black;
     background-color: black;
-    font-family: "Lato Bold",Arial;
+    font-family: "Lato Bold", "Arial";
     margin-bottom: 1rem;
 }
 
