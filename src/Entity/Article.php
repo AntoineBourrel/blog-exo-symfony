@@ -55,6 +55,11 @@ class Article
     // déclaration de la colonne content
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     */
+    private $category;
+
     // GETTER et SETTER des attributs de la class Article
     public function getId(): ?int
     {
@@ -120,4 +125,18 @@ class Article
 
         return $this;
     }
+
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+
+    public function setCategory($category): void
+    {
+        $this->category = $category;
+    }
+
+
 }
