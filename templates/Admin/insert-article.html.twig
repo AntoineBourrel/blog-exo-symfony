@@ -2,5 +2,23 @@
 
 {% block main %}
     {# Utilisation de la function form pour générer le html du formulaire lié à la variable form #}
-    {{ form(form) }}
+    {{ form_start(form) }}
+
+        {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-article-title-label'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-article-title-widget form-control'}}) }}
+    <br>
+        {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-article-image-label'}}) }}
+        {{ form_widget(form.image, {'attr': {'class': 'form-article-image-widget form-control'}}) }}
+    <br>
+        {{ form_label(form.category, 'Categorie', {'label_attr': {'class': 'form-article-category-label'}}) }}
+        {{ form_widget(form.category, {'attr': {'class': 'form-article-category-widget dropdown-toggle'}}) }}
+    <br>
+        {{ form_label(form.author, 'Autheur', {'label_attr': {'class': 'form-article-author-label'}}) }}
+        {{ form_widget(form.author, {'attr': {'class': 'form-article-author-widget form-control'}}) }}
+    <br>
+        {{ form_label(form.content, 'Content', {'label_attr': {'class': 'form-article-content-label'}}) }}
+        {{ form_widget(form.content, {'attr': {'class': 'form-article-content-widget form-control'}}) }}
+    <br>
+        {{ form_label(form.submit, 'Submit', {'label_attr': {'class': 'form-article-submit-label'}}) }}
+        {{ form_widget(form.submit, {'attr': {'class': 'form-article-submit-widget btn bg-warning'}}) }}
 {% endblock %}
