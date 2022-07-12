@@ -55,7 +55,7 @@ class Article
     // déclaration de la colonne content
     private $content;
 
-    // Création de la foreign key relient article et category
+    // Création de la foreign key reliant article et category
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category")
      */

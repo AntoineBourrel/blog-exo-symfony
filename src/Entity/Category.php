@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -46,6 +47,18 @@ class Category
      */
     // déclaration de la colonne isPublished
     private $isPublished;
+
+    // Création de la foreign key reliant Category à Articles
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     */
+
+    private $articles;
+    // Constructeur créant un array dès la création d'une instance de category.articles
+    public function __construct()
+    {
+       $this->articles = new ArrayCollection();
+    }
 
 
     // GETTER et SETTER des attributs de la class Category
@@ -101,4 +114,18 @@ class Category
 
         return $this;
     }
+
+
+    public function getArticles()
+    {
+        return $this->articles;
+    }
+
+
+    public function setArticles($articles)
+    {
+        $this->articles = $articles;
+    }
+
+
 }

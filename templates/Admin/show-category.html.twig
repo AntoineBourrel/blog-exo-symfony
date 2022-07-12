@@ -3,6 +3,10 @@
     <div class="article" style="color: {{ category.color }};">
         <h2>{{ category.title }}</h2>
         <p>{{ category.description }}</p>
+        {# lecture du tableau category.articles #}
+        {% for article in category.articles %}
+            <p>{{ article.title }}</p>
+        {% endfor %}
     </div>
 
 {% endblock %}
