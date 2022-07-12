@@ -19,6 +19,8 @@ class ArticleType extends AbstractType
             // Génère les inputs du formulaire
             ->add('title')
             ->add('image')
+            // un input lié à category pour gérer son inclusion lors de la création ou update d'article
+            // Il est de type EntityType car il est lié à une entité
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'title'
