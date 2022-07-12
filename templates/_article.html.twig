@@ -5,7 +5,7 @@
     <div class="text">
         <h2>{{ article.title }}</h2>
         {% if article.category %}
-            <p>{{ article.category.title }}</p>
+            <p style="color : {{ article.category.color }};">{{ article.category.title }}</p>
         {% endif %}
         <p>{{ article.content }}</p>
         <p>auteur : {{ article.author }}</p>
