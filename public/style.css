@@ -63,8 +63,10 @@ header ul li a:hover{
 header .search{
     display: flex;
     border: none;
-    background-color: none;
+    background-color: black;
 }
+
+
 
 a article:hover{
     background-color: black;
