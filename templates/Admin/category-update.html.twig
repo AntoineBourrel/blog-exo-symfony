@@ -5,13 +5,17 @@
 
         {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-category-title-label'}}) }}
         {{ form_widget(form.title, {'attr': {'class': 'form-category-title-widget form-control'}}) }}
+        {{ form_errors(form.title) }}
         <br>
         {{ form_label(form.color, 'Couleur', {'label_attr': {'class': 'form-category-color-label'}}) }}
         {{ form_widget(form.color, {'attr': {'class': 'form-category-color-widget form-control-color'}}) }}
+        {{ form_errors(form.color) }}
         <br>
         {{ form_label(form.description, 'Description', {'label_attr': {'class': 'form-category-description-label'}}) }}
         {{ form_widget(form.description, {'attr': {'class': 'form-category-description-widget form-control'}}) }}
+        {{ form_errors(form.description) }}
         <br>
         {{ form_label(form.submit, 'Submit', {'label_attr': {'class': 'form-article-submit-label'}}) }}
         {{ form_widget(form.submit, {'attr': {'class': 'form-article-submit-widget btn bg-warning'}}) }}
+
 {% endblock %}

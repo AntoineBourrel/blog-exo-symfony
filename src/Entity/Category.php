@@ -6,6 +6,7 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
@@ -24,25 +25,28 @@ class Category
     // Paramètre de la colonne title de la table Article, Type string qui devient Varchar 255
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="t'as oublié le titre connard !")
      */
     // déclaration de la colonne title
     private $title;
 
-    // Paramètre de la colonne title de la table Article, Type string qui devient Varchar 255
+    // Paramètre de la colonne color de la table Article, Type string qui devient Varchar 255
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="t'as oublié la couleur mongole !")
      */
     // déclaration de la colonne color
     private $color;
 
-    // Paramètre de la colonne title de la table Article, Type text
+    // Paramètre de la colonne description de la table Article, Type text
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotNull(message="t'as oublié la description tocard !")
      */
     // déclaration de la colonne description
     private $description;
 
-    // Paramètre de la colonne title de la table Article, Type booléens
+    // Paramètre de la colonne isPublished de la table Article, Type booléens
     /**
      * @ORM\Column(type="boolean")
      */

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 // Déclaration de création d'une class qui sera une entité via ORM
 /**
@@ -23,6 +24,7 @@ class Article
     // Paramètre de la colonne title de la table Article, Type string qui devient Varchar 255
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="t'as oublié le titre connard !")
      */
     // déclaration de la colonne title
     private $title;
@@ -30,6 +32,7 @@ class Article
     // Paramètre de la colonne image de la table Article, Type string qui devient Varchar 255
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="t'as oublié l'image patate !")
      */
     // déclaration de la colonne image
     private $image;
@@ -44,13 +47,15 @@ class Article
     // Paramètre de la colonne image de la table Article, Type string qui devient Varchar 255
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotNull(message="t'as oublié l'autheur mongole !")
      */
     // déclaration de la colonne author
     private $author;
 
-    // Paramètre de la colonne IsPublished de la table Article, Type text
+    // Paramètre de la colonne content de la table Article, Type text
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotNull(message="t'as oublié le contenu petit con !")
      */
     // déclaration de la colonne content
     private $content;
