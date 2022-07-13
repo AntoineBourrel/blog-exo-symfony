@@ -55,11 +55,13 @@ class Article
     // déclaration de la colonne content
     private $content;
 
-    // Création de la foreign key reliant article et category
+    // Création de la Foreign key reliant Article et Category (ManyToOne)
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
      */
     private $category;
+
+
 
     // GETTER et SETTER des attributs de la class Article
     public function getId(): ?int

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,16 +49,15 @@ class Category
     // déclaration de la colonne isPublished
     private $isPublished;
 
-    // Création de la foreign key reliant Category à Articles
+    // Création de la foreign key reliant Category à Articles (OneToMany)
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="category")
      */
-
     private $articles;
-    // Constructeur créant un array dès la création d'une instance de category.articles
+    // Constructeur qui créé un tableau avec les articles dedans
     public function __construct()
     {
-       $this->articles = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
 
@@ -115,17 +115,38 @@ class Category
         return $this;
     }
 
-
-    public function getArticles()
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
     {
         return $this->articles;
     }
 
-
-    public function setArticles($articles)
+    public function addArticle(Article $article): self
     {
-        $this->articles = $articles;
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setCategory($this);
+        }
+
+        return $this;
     }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getCategory() === $this) {
+                $article->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 
 
 }
