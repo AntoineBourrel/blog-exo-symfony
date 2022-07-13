@@ -49,12 +49,12 @@ class Category
     // déclaration de la colonne isPublished
     private $isPublished;
 
-    // Création de la foreign key reliant Category à Articles (OneToMany)
+    // Relation Category à Article (OneToMany)
     /**
      * @ORM\OneToMany(targetEntity=Article::class, mappedBy="category")
      */
     private $articles;
-    // Constructeur qui créé un tableau avec les articles dedans
+    // Constructeur qui créé un tableau vide
     public function __construct()
     {
         $this->articles = new ArrayCollection();
