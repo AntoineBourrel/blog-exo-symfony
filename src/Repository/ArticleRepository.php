@@ -39,6 +39,23 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    public function searchByWord($search){
+
+        // Création du query builder qui permet de faire des requêtes SQL en PHP
+        $qb = $this->createQueryBuilder('article');
+        // SELECT de la table Article
+        $query = $qb->select('article')
+            // Recupération des articles où le titre est 'search'
+            ->where('article.title LIKE :search')
+            // Paramétrage de 'search' où il sera trouvé malgré présence, avant ou après,
+            // des caractères de la chaine de caractères $search
+            ->setParameter('search', '%'.$search.'%')
+            // Récupération de la requête
+            ->getQuery();
+        //renvoie en base de données
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */

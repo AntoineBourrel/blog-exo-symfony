@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <section class="result">
+
+        {% for article in articles %}
+
+            <a href="{{ path('admin_article', {'id' : article.id }) }}">{%  include '_article.html.twig' %}</a>
+
+        {% endfor %}
+    </section>
+{% endblock %}

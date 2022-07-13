@@ -21,6 +21,10 @@
         <li><a href="{{ path('admin_list') }}">Liste d'articles</a></li>
         <li><a href="{{ path('admin_list_category') }}">Liste de catégories</a></li>
     </ul>
+    <form action="{{ path('admin_article_search') }}" method="GET" class="search">
+        <input type="text" name="search" class="form-control">
+        <input type="submit" class="btn bg-warning">
+    </form>
 </header>
 
 {% for message in app.flashes('success') %}

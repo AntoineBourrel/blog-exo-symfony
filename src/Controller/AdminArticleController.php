@@ -16,7 +16,7 @@ class AdminArticleController extends AbstractController
 {
     //création de la route vers un article
     /**
-     * @Route ("/admin/article/{id}", name="admin_article")
+     * @Route ("/admin/show-article/{id}", name="admin_article")
      */
     public function showArticle(ArticleRepository $articleRepository, $id)
     {
@@ -164,47 +164,24 @@ class AdminArticleController extends AbstractController
             'form' => $form->createView()
         ]);
 
+    }
+
+    /**
+     * @Route ("/admin/article/search", name="admin_article_search")
+     */
+    public function articleSearch(Request $request, ArticleRepository $articleRepository)
+    {
+        // Récupération valeur GET dans l'URL
+        $search = $request->query->get('search');
+
+        // je vais créer une méthode dans l'ArticleRepository
+        // qui trouve un article en fonction d'un mot dans son titre ou son contenu
+        $articles = $articleRepository->searchByWord($search);
 
 
-        /* // Récupération des valeurs du formulaire
-        $title = $request->query->get('title');
-        $content = $request->query->get('content');
-        $image = $request->query->get('image');
-
-        // Sélection de l'article en fonction de l'id
-        $article = $articleRepository->find($id);
-        // Vérification si les valeurs 'get' existe
-        if($request->query->has('title') &&
-            $request->query->has('content') &&
-            $request->query->has('image'))
-        {
-            // Vérification si les valeurs 'get' sont vides
-            if (!empty($title) &&
-                !empty($content) &&
-                !empty($image)
-            ) {
-                // Valeurs de l'objet article à mettre à jour
-                $article->setTitle($title);
-                $article->setContent($content);
-                $article->setImage($image);
-                // écriture en base de donnée
-                $entityManager->persist($article);
-                $entityManager->flush();
-                // retour sur la page de liste d'articles
-                $this->addFlash('success', 'Vous avez bien modifié votre article');
-                return $this->redirectToRoute('admin_list');
-            } else {
-                // Erreur en cas de valeurs vide
-                $this->addFlash('error', 'Veuillez remplir les champs obligatoires');
-                return $this->redirectToRoute('admin_list');
-            }
-        }
-        // Si les valeurs n'existe pas, affichage de la page du formulaire
-        return $this->render('Admin/article-update.html.twig', [
-            'article' => $article
-        ]); */
-
-
-
+        // Renvoie vers le fichier twig
+        return $this->render('admin/search-article.html.twig', [
+            'articles' => $articles
+        ]);
     }
 }
